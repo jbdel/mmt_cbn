@@ -1,0 +1,12 @@
+default_params: &default_params
+  - separator: " "
+  - postproc_fn: "seq2seq.data.postproc.strip_bpe"
+
+metrics:
+  - class: LogPerplexityMetricSpec
+  - class: MeteorMetricSpec
+    params:
+      <<: *default_params
+  - class: BleuMetricSpec
+    params:
+      <<: *default_params

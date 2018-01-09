@@ -1,0 +1,39 @@
+model: AttentionSeq2Seq
+model_params:
+  attention.class: seq2seq.decoders.attention.AttentionLayerBahdanau
+  attention.params:
+    num_units: 512
+  bridge.class: seq2seq.models.bridges.MeanInitialStateBridge
+  bridge.params:
+    bridge_input: outputs
+    activation_fn: tensorflow.nn.tanh
+  embedding.dim: 128
+  encoder.class: seq2seq.encoders.BidirectionalRNNEncoder
+  encoder.params:
+    resnet:
+      moving_average_decay: 0.99
+    rnn_cell:
+      cell_class: LayerNormGRUCell
+      cell_params:
+        num_units: 256
+      dropout_input_keep_prob: 0.7
+      dropout_output_keep_prob: 0.5
+      num_layers: 1
+  decoder.class: seq2seq.decoders.AttentionDecoder
+  decoder.params:
+    rnn_cell:
+      cell_class: GRUCell
+      cell_params:
+        num_units: 256
+      dropout_input_keep_prob: 1.0
+      dropout_output_keep_prob: 1.0
+      num_layers: 1
+    dropout_decoder:
+       dropout_deep_output_layer: 0.5
+  optimizer.name: Adam
+  optimizer.params:
+    epsilon: 0.0000008
+  optimizer.learning_rate: 0.0004
+  source.max_seq_len: 50
+  source.reverse: false
+  target.max_seq_len: 50
