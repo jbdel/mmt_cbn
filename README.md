@@ -23,8 +23,11 @@ Infer-tfr.sh is true inference, see code inside (similar to test-tfr.sh)
 **Code**:
 
 -Encoder is taking place in seq2seq/encoders/rnn_encoder class BidirectionalRNNEncoder where it call the resnet.
+
 -Resnet implementation is in seq2seq/contrib/resnet/resnet_v1.py. Method resnet_v1 uses layers.batchnorm.
+
 -Layers class is found at seq2seq/contrib/layers.py. Method batch_norm implements conditional batch norm (line 833). You can exclude blocks from CBN at line 827 with variable exclude_scopes. You can exclude blocks from training in resnet_utils.py line 184.
+
 -Models settings are in example_configs/nmt_large.yml.
 
 
